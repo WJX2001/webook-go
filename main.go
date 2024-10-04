@@ -8,7 +8,7 @@ import (
 func main() {
 	server := gin.Default()
 	// server.Use(utils.Cors())
-	u := &user.UserHandler{}
+	u := user.NewUserHandler()
 	u.RegisterRoutesUser(server)
 	server.Run("localhost:8080")
 }
