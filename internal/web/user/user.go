@@ -22,7 +22,7 @@ func (u *UserHandler) RegisterRoutesUser(server *gin.Engine) {
 }
 
 func (u *UserHandler) SignUp(ctx *gin.Context) {
-
+	// 定义在里面 防止其他人调用
 	type SignUpReq struct {
 		Email           string `json:"emailInfo"`
 		ConfirmPassword string `json: "confirmPassword"`
@@ -35,6 +35,13 @@ func (u *UserHandler) SignUp(ctx *gin.Context) {
 	if err := ctx.Bind(&req); err != nil {
 		return
 	}
+
+	// 定义正则表达式
+	const (
+		emailRegexPattern    = `^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$`
+		passwordRegexPattern = `^a-zA-Z\w{5,17}$`
+	)
+
 	ctx.String(http.StatusOK, "hello 你在注册")
 	fmt.Printf("%v", req)
 	// 这边就是数据库操作
