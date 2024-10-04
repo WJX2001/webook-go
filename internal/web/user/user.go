@@ -46,8 +46,8 @@ func (u *UserHandler) SignUp(ctx *gin.Context) {
 	// 定义在里面 防止其他人调用
 	type SignUpReq struct {
 		Email           string `json:"emailInfo"`
-		ConfirmPassword string `json: "confirmPassword"`
-		Password        string `json: "passWord"`
+		PasswordConfirm string `json: "passwordConfirm"`
+		Password        string `json: "password"`
 	}
 
 	var req SignUpReq
@@ -77,7 +77,7 @@ func (u *UserHandler) SignUp(ctx *gin.Context) {
 		return
 	}
 
-	if req.ConfirmPassword != req.Password {
+	if req.PasswordConfirm != req.Password {
 		ctx.String(http.StatusOK, "两次密码不一致")
 		return
 	}
